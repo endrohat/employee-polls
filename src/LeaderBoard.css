@@ -1,0 +1,43 @@
+/* src/components/LeaderboardComponent.css */
+.leaderboard-container {
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  thead {
+    background-color: #e19595;
+  }
+  
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-info {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  
+  .user-name {
+    display: block;
+    font-weight: bold;
+  }
+  
+  .user-id {
+    color: gray;
+    font-size: 14px;
+  }
+  

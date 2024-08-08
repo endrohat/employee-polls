@@ -2,8 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import QuestionsListSection from './components/QuestionListSection';
 import Poll from './components/Poll';
+import CreatePoll from './components/CreatePoll';
+import Leaderboard from './components/LeaderBoard';
+import { useEffect, Fragment } from "react";
+import { connect } from "react-redux";
+import { handleInitialData } from "./actions/shared";
+
 
 function App() {
+
+  useEffect((props) => {
+    props.dispatch(handleInitialData());
+  }, []);
 
   const questions = [
     { username: 'mtsamis', timestamp: '4:11PM 11/23/2021' },
@@ -21,13 +31,47 @@ function App() {
     ],
   };
 
+  const users = [
+    {
+      name: 'Sarah Edo',
+      id: 'sarahedo',
+      avatar: 'https://via.placeholder.com/40',
+      answered: 4,
+      created: 2,
+    },
+    {
+      name: 'Mike Tsamis',
+      id: 'mtsamis',
+      avatar: 'https://via.placeholder.com/40',
+      answered: 3,
+      created: 3,
+    },
+    {
+      name: 'Tyler McGinnis',
+      id: 'tylermcginnis',
+      avatar: 'https://via.placeholder.com/40',
+      answered: 2,
+      created: 2,
+    },
+    {
+      name: 'Zenobia Oshikanlu',
+      id: 'zoshikanlu',
+      avatar: 'https://via.placeholder.com/40',
+      answered: 1,
+      created: 0,
+    },
+  ];
+
   return (
     <div className="App">
       <header className="App-header">
-      <Poll author={pollData.author} avatar={pollData.avatar} options={pollData.options} />
+      <Leaderboard users={users} />
       </header>
     </div>
   );
 }
+const mapStateToProps = ({ authedUser }) => ({
+  loading: authedUser === null,
+});
 
-export default App;
+export default connect(mapStateToProps)(App);
