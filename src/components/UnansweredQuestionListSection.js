@@ -4,7 +4,7 @@ import '../QuestionListSection.css';
 import { connect } from "react-redux";
 
 
-const QuestionsListSection = ({ questions , authedUser}) => {
+const UnansweredQuestionListSection = ({ questions , authedUser}) => {
 
   if (questions === null || Object.keys(questions).length === 0) {
     return (<div></div>);
@@ -15,7 +15,7 @@ const QuestionsListSection = ({ questions , authedUser}) => {
   let result = Object.entries(questions)
   .filter(([key, value]) => {
     const { optionOne, optionTwo } = value;
-    return (optionOne.votes.includes(passedString) || optionTwo.votes.includes(passedString));
+    return !(optionOne.votes.includes(passedString) || optionTwo.votes.includes(passedString));
   }).map(([key, value]) => {
     return {
       id: key,
@@ -28,7 +28,7 @@ const QuestionsListSection = ({ questions , authedUser}) => {
   
   return (
     <div className="new-questions-section">
-      <h2 className="section-title">Completed Questions</h2>
+      <h2 className="section-title">New Questions</h2>
       <div className="questions-grid">
         {result.map((question, index) => (
           <QuestionDisplay
@@ -47,4 +47,4 @@ const mapStateToProps = ({ questions , authedUser}) => ({
   questions: questions,
   authedUser: authedUser
 });
-export default connect(mapStateToProps)(QuestionsListSection);
+export default connect(mapStateToProps)(UnansweredQuestionListSection);

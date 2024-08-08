@@ -1,6 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import QuestionsListSection from './components/QuestionListSection';
+import UnansweredQuestionListSection from './components/UnansweredQuestionListSection';
 import Poll from './components/Poll';
 import CreatePoll from './components/CreatePoll';
 import Leaderboard from './components/LeaderBoard';
@@ -9,9 +10,10 @@ import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 
 
-function App() {
+const App = (props) => {
 
-  useEffect((props) => {
+  useEffect(() => {
+    console.log(props)
     props.dispatch(handleInitialData());
   }, []);
 
@@ -65,11 +67,13 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-      <Leaderboard users={users} />
+      <UnansweredQuestionListSection/>
+      <QuestionsListSection/>
+      <Poll id = "vthrdm985a262al8qx3do"></Poll>
       </header>
     </div>
   );
-}
+};
 const mapStateToProps = ({ authedUser }) => ({
   loading: authedUser === null,
 });
