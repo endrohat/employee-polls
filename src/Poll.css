@@ -1,0 +1,44 @@
+
+.poll-container {
+    text-align: center;
+    margin-top: 50px;
+  }
+  
+  .avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 20px 0;
+  }
+  
+  .options {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .option {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .option p {
+    margin: 0 0 10px;
+  }
+  
+  .option button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+  .option button:hover {
+    background-color: #45a049;
+  }
+  
