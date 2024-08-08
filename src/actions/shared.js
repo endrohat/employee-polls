@@ -7,6 +7,7 @@ import { showLoading, hideLoading } from "react-redux-loading-bar";
 const AUTHED_ID = "tylermcginnis";
 
 export function handleInitialData() {
+  console.log("initial data");
   return (dispatch) => {
     //dispatch(showLoading());
     return getInitialData().then(({ users, questions }) => {

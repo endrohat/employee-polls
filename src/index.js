@@ -9,12 +9,19 @@ import reducer from "./reducers";
 import middleware from "./middleware";
 
 const store = createStore(reducer, middleware);
-
+/*
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <App />
   </Provider>
+); */
+
+ReactDOM.render(
+  <Provider store={store}>
+      <App />
+  </Provider>,
+  document.getElementById("root")
 );
 
 // If you want to start measuring performance in your app, pass a function
