@@ -9,12 +9,12 @@ const AUTHED_ID = "tylermcginnis";
 export function handleInitialData() {
   console.log("initial data");
   return (dispatch) => {
-    //dispatch(showLoading());
+    dispatch(showLoading());
     return getInitialData().then(({ users, questions }) => {
       dispatch(receiveUsers(users));
       dispatch(receiveQuestions(questions));
-      dispatch(setAuthedUser(AUTHED_ID));
-      //dispatch(hideLoading());
+      //dispatch(setAuthedUser(AUTHED_ID));
+      dispatch(hideLoading());
     });
   };
 }

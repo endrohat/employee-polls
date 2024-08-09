@@ -1,21 +1,27 @@
 
 import React, { useState } from 'react';
 import '../Login.css';
-
-const Login = ({ users }) => {
+import { connect } from 'react-redux';
+import { LoadingBar } from 'react-redux-loading-bar';
+import setAuthedUser from '../actions/authedUser';
+const Login = ({ users, dispatch }) => {
   const [selectedUser, setSelectedUser] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
     console.log('Selected User:', selectedUser);
+    dispatch(setAuthedUser(selectedUser))
   };
+  if(users=== null ) {
+    return ( <LoadingBar />)
+  }
 
   return (
     <div className="login-container">
       <h1>Employee Polls</h1>
       <img
-        src="https://via.placeholder.com/300"
+        src="images/pollsHeader.png"
         alt="Employee Polls"
         className="login-image"
       />
@@ -30,11 +36,12 @@ const Login = ({ users }) => {
             <option value="" disabled>
               Select a user
             </option>
-            {users.map((user) => (
-              <option key={user.id} value={user.id}>
-                {user.name}
+            {Object.keys(users).map(userId => (
+              <option key={userId} value={userId}>
+                {users[userId].name}
               </option>
             ))}
+            
           </select>
         </div>
         <button type="submit" disabled={!selectedUser}>
@@ -45,4 +52,9 @@ const Login = ({ users }) => {
   );
 };
 
-export default Login;
+const mapStateToProps = ({ authedUser, users }) => ({
+  authedUser, users
+});
+
+
+export default connect(mapStateToProps)(Login);
