@@ -1,8 +1,10 @@
 // src/components/CreatePollComponent.js
 import React, { useState } from 'react';
 import '../CreatePoll.css';
+import { handleAddQuestion } from '../actions/questions';
+import { connect } from "react-redux";
 
-const CreatePoll= () => {
+const CreatePoll= ({dispatch}) => {
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
 
@@ -11,6 +13,13 @@ const CreatePoll= () => {
     // Handle form submission logic here
     console.log('Option One:', optionOne);
     console.log('Option Two:', optionTwo);
+    console.log(dispatch)
+    let question = {
+      optionOneText : optionOne,
+      optionTwoText : optionTwo
+    }
+    dispatch(handleAddQuestion(question));
+
   };
 
   return (
@@ -43,5 +52,5 @@ const CreatePoll= () => {
     </div>
   );
 };
-
-export default CreatePoll;
+export default connect()(CreatePoll);
+//export default CreatePoll;

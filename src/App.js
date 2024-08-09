@@ -8,7 +8,7 @@ import Leaderboard from './components/LeaderBoard';
 import { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
-
+import Login from './components/Login';
 
 const App = (props) => {
 
@@ -67,9 +67,12 @@ const App = (props) => {
   return (
     <div className="App">
       <header className="App-header">
+       
       <UnansweredQuestionListSection/>
       <QuestionsListSection/>
-      <Poll id = "vthrdm985a262al8qx3do"></Poll>
+      <Poll id = "loxhs1bqm25b708cmbf3g"></Poll>
+      <Login users={users} />
+      <CreatePoll></CreatePoll>
       </header>
     </div>
   );
