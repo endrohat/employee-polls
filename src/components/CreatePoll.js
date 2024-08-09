@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import '../CreatePoll.css';
 import { handleAddQuestion } from '../actions/questions';
 import { connect } from "react-redux";
-import { Navigate, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 
 const CreatePoll= ({dispatch}) => {
   const navigate = useNavigate();
