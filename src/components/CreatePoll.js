@@ -3,8 +3,10 @@ import React, { useState } from 'react';
 import '../CreatePoll.css';
 import { handleAddQuestion } from '../actions/questions';
 import { connect } from "react-redux";
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const CreatePoll= ({dispatch}) => {
+  const navigate = useNavigate();
   const [optionOne, setOptionOne] = useState('');
   const [optionTwo, setOptionTwo] = useState('');
 
@@ -19,7 +21,7 @@ const CreatePoll= ({dispatch}) => {
       optionTwoText : optionTwo
     }
     dispatch(handleAddQuestion(question));
-
+    navigate("/");
   };
 
   return (

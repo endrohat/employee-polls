@@ -35,6 +35,7 @@ const QuestionsListSection = ({ questions , authedUser}) => {
             key={index}
             username={question.author}
             timestamp={question.timestamp}
+            qid = {question.id}
           />
         ))}
       </div>

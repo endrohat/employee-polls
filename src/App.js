@@ -9,6 +9,10 @@ import { useEffect, Fragment } from "react";
 import { connect } from "react-redux";
 import { handleInitialData } from "./actions/shared";
 import Login from './components/Login';
+import Nav from './components/Nav';
+import { Router } from 'react-router-dom';
+import { Routes, Route } from "react-router-dom";
+import HomePage from './components/HomePage';
 
 const App = (props) => {
 
@@ -17,64 +21,26 @@ const App = (props) => {
     props.dispatch(handleInitialData());
   }, []);
 
-  const questions = [
-    { username: 'mtsamis', timestamp: '4:11PM 11/23/2021' },
-    { username: 'sarahedo', timestamp: '5:22PM 3/3/2017' },
-    { username: 'tylermcginnis', timestamp: '6:42AM 12/24/2016' },
-    { username: 'sarahedo', timestamp: '10:21PM 6/28/2016' },
-  ];
-
-  const pollData = {
-    author: 'sarahedo',
-    avatar: 'https://via.placeholder.com/150', // Replace with actual image URL if available
-    options: [
-      { text: 'Build our new application with Javascript', buttonText: 'Click' },
-      { text: 'Build our new application with Typescript', buttonText: 'Click' },
-    ],
-  };
-
-  const users = [
-    {
-      name: 'Sarah Edo',
-      id: 'sarahedo',
-      avatar: 'https://via.placeholder.com/40',
-      answered: 4,
-      created: 2,
-    },
-    {
-      name: 'Mike Tsamis',
-      id: 'mtsamis',
-      avatar: 'https://via.placeholder.com/40',
-      answered: 3,
-      created: 3,
-    },
-    {
-      name: 'Tyler McGinnis',
-      id: 'tylermcginnis',
-      avatar: 'https://via.placeholder.com/40',
-      answered: 2,
-      created: 2,
-    },
-    {
-      name: 'Zenobia Oshikanlu',
-      id: 'zoshikanlu',
-      avatar: 'https://via.placeholder.com/40',
-      answered: 1,
-      created: 0,
-    },
-  ];
-
   return (
-    <div className="App">
-      <header className="App-header">
-       
-      <UnansweredQuestionListSection/>
-      <QuestionsListSection/>
-      <Poll id = "loxhs1bqm25b708cmbf3g"></Poll>
-      <Login users={users} />
-      <CreatePoll></CreatePoll>
-      </header>
-    </div>
+    <Fragment>
+      <div className="App">
+        <header className="App-header">
+        <div className="container">
+          <Nav />
+ 
+          <Routes>
+            <Route path="/" exact element={ <HomePage />} />
+            <Route path="/Poll/:id" element={<Poll />} />
+            <Route path="/new" element={<CreatePoll />} />
+            <Route path="/leaderboard" element={<Leaderboard />} />
+          </Routes>
+
+          
+          </div>
+        </header>
+      </div>
+    </Fragment>
+
   );
 };
 const mapStateToProps = ({ authedUser }) => ({

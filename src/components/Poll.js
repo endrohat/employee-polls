@@ -3,6 +3,18 @@ import React from 'react';
 import '../Poll.css';
 import { connect } from "react-redux";
 import { handleAddAnswer } from '../actions/questions';
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+
+const withRouter = (Component) => {
+  const ComponentWithRouterProp = (props) => {
+    let location = useLocation();
+    let navigate = useNavigate();
+    let params = useParams();
+    return <Component {...props} router={{ location, navigate, params }} />;
+  };
+
+  return ComponentWithRouterProp;
+};
 
 const Poll = ({ question, user, authedUser, dispatch }) => {
   if (question == null || Object.keys(question).length === 0) {
@@ -21,12 +33,13 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
 
   const handleVote = (option) => {
     console.log(option);
-    // Implement vote handling logic here
-    // Example: Update the state or call a function to update the poll
+
     dispatch(handleAddAnswer({
       qid: question.id,
       answer : option
     }))
+    
+
   };
 
   const hasUserVoted = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser);
@@ -58,7 +71,9 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
   );
 };
 
-const mapStateToProps = ({ questions , users, authedUser}, id) => {
+const mapStateToProps = ({ questions , users, authedUser}, props) => {
+  const { id } = props.router.params;
+
   if (questions === null || Object.keys(questions).length === 0) {
     return {}
   }
@@ -67,10 +82,13 @@ const mapStateToProps = ({ questions , users, authedUser}, id) => {
     return {}
   }
 
+  
+
+
    return {
-  question: questions[id.id],
-  user: users[questions[id.id].author],
+  question: questions[id],
+  user: users[questions[id].author],
   authedUser : authedUser
 }};
-export default connect(mapStateToProps)(Poll);
+export default withRouter(connect(mapStateToProps)(Poll));
 
