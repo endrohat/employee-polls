@@ -44,11 +44,11 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
   };
 
   const hasUserVoted = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser);
-  const avatar = "../" + user.avatarURL
+
   return (
     <div className="poll-container">
       <h2>Poll by {user.name}</h2>
-      <img src={avatar} alt="User Avatar" className="avatar" />
+      <img src={user.avatarURL} alt="User Avatar" className="avatar" />
       <h3>Would You Rather</h3>
       <div className="options">
         <div className="option">
