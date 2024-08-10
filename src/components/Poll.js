@@ -42,8 +42,9 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
     
 
   };
-
-  const hasUserVoted = question.optionOne.votes.includes(authedUser) || question.optionTwo.votes.includes(authedUser);
+  const hasOptedForOptionOne = question.optionOne.votes.includes(authedUser);
+  const hasOptedForOptionTwo = question.optionTwo.votes.includes(authedUser);
+  const hasUserVoted = hasOptedForOptionOne || hasOptedForOptionTwo
 
   return (
     <div className="poll-container">
@@ -51,7 +52,7 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
       <img src={user.avatarURL} alt="User Avatar" className="avatar" />
       <h3>Would You Rather</h3>
       <div className="options">
-        <div className="option">
+        <div className={`option ${hasOptedForOptionOne ? 'voted' : ''}`}>
           <p>{question.optionOne.text}</p>
           {hasUserVoted? (
             <p>{getPercentage(question.optionOne.votes)}% voted</p>
@@ -59,7 +60,7 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
            <button onClick={() => handleVote('optionOne')}>Click</button>
           )}
         </div>
-        <div className="option">
+        <div className={`option ${hasOptedForOptionTwo ? 'voted' : ''}`}>
           <p>{question.optionTwo.text}</p>
           {hasUserVoted? (
             <p>{getPercentage(question.optionTwo.votes)}% voted</p>

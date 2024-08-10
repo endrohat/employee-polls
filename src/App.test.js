@@ -62,7 +62,7 @@ describe('APP', () => {
   
     fireEvent.click(submitButton);
 
-    expect(screen.getByText('New Questions')).toBeInTheDocument()
+    expect(screen.getByText('New Questions Section')).toBeInTheDocument()
   });
 
   it('will go back to login after logout', async () => {

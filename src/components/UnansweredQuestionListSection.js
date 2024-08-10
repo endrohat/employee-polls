@@ -28,7 +28,7 @@ const UnansweredQuestionListSection = ({ questions , authedUser}) => {
   
   return (
     <div className="new-questions-section">
-      <h2 className="section-title">New Questions</h2>
+      <h2 className="section-title">New Questions Section</h2>
       <div className="questions-grid">
         {result.map((question, index) => (
           <QuestionDisplay
