@@ -6,6 +6,7 @@ This project contains a Polling feature for employees where the users can log in
 
 Clone or download the project
 Run `npm install` in the project root directory to install dependencies
+
 Run `npm start` to run the project
 
 Runs the app in the development mode.\
