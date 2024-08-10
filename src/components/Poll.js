@@ -4,6 +4,7 @@ import '../Poll.css';
 import { connect } from "react-redux";
 import { handleAddAnswer } from '../actions/questions';
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import ErrorPage from './ErrorPage';
 
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
@@ -18,11 +19,11 @@ const withRouter = (Component) => {
 
 const Poll = ({ question, user, authedUser, dispatch }) => {
   if (question == null || Object.keys(question).length === 0) {
-    return (<div></div>)
+    return (<ErrorPage/>)
   }
 
   if (user == null || Object.keys(user).length === 0) {
-    return (<div></div>)
+    return (<ErrorPage/>)
   }
 
   const totalVotes = question.optionOne.votes.length + question.optionTwo.votes.length;
@@ -74,16 +75,18 @@ const Poll = ({ question, user, authedUser, dispatch }) => {
 const mapStateToProps = ({ questions , users, authedUser}, props) => {
   const { id } = props.router.params;
 
-  if (questions === null || Object.keys(questions).length === 0) {
+  if (questions == null || Object.keys(questions).length === 0) {
     return {}
   }
 
-  if (users === null || Object.keys(users).length === 0) {
+  if (users == null || Object.keys(users).length === 0) {
     return {}
   }
 
   
-
+  if (questions[id] == null) {
+    return {}
+  }
 
    return {
   question: questions[id],

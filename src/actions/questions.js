@@ -1,6 +1,6 @@
 import { saveLikeToggle, saveQuestion, saveQuestionAnswer } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
-import { addAnswerToUser } from "./users";
+import { addAnswerToUser, addQuestionToUser } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_ANSWER = "ADD_ANSWER";
@@ -24,14 +24,18 @@ export function handleAddQuestion(question) {
   return (dispatch, getState) => {
     const { authedUser } = getState();
 
-    //dispatch(showLoading());
+    dispatch(showLoading());
 
     return saveQuestion({
       ...question,
       author: authedUser
     })
-      .then((question) => dispatch(addQuestion(question)))
-      //.then(() => dispatch(hideLoading()));
+      .then((question) => {
+        dispatch(addQuestion(question))
+        dispatch(addQuestionToUser({qid : question.id, authedUser : authedUser}))
+      })
+     
+      .then(() => dispatch(hideLoading()));
   };
 } 
 
