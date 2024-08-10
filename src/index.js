@@ -10,13 +10,7 @@ import middleware from "./middleware";
 import { BrowserRouter as Router } from 'react-router-dom';
 
 const store = createStore(reducer, middleware);
-/*
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <Provider store={store}>
-    <App />
-  </Provider>
-); */
+
 
 ReactDOM.render(
   <Provider store={store}>

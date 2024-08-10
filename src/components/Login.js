@@ -10,11 +10,11 @@ const Login = ({ users, dispatch }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Handle login logic here
-    console.log('Selected User:', selectedUser);
+    //console.log('Selected User:', selectedUser);
     dispatch(setAuthedUser(selectedUser))
   };
-  if(users=== null ) {
-    return ( <LoadingBar />)
+  if (users === null) {
+    return (<LoadingBar />)
   }
 
   return (
@@ -29,7 +29,7 @@ const Login = ({ users, dispatch }) => {
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label>Select User</label>
-          <select
+          <select data-testid="user-select"
             value={selectedUser}
             onChange={(e) => setSelectedUser(e.target.value)}
           >
@@ -41,10 +41,10 @@ const Login = ({ users, dispatch }) => {
                 {users[userId].name}
               </option>
             ))}
-            
+
           </select>
         </div>
-        <button type="submit" disabled={!selectedUser}>
+        <button type="submit" disabled={!selectedUser} data-testid="submit-button" >
           Submit
         </button>
       </form>
